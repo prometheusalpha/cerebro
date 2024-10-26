@@ -1,6 +1,7 @@
 import { Hash } from "lucide-react";
 import React, { useState } from "react";
 import { useStore } from "../store/useStore";
+import { redirect } from "react-router-dom";
 
 export default function InputScreen() {
   const [title, setTitle] = useState("");
@@ -28,6 +29,8 @@ export default function InputScreen() {
     }
     // clear tag input
     setTagInput("");
+    // navigate to kanban
+    redirect("/kanban");
   };
 
   const handleAddTag = (e: React.KeyboardEvent) => {
@@ -92,7 +95,9 @@ export default function InputScreen() {
 
           <button
             type="submit"
-            className="w-full py-2 px-4 bg-sky-600 text-white rounded-lg hover:bg-sky-700 transition-colors"
+            className="w-full py-2 px-4 bg-sky-600 text-white rounded-lg hover:bg-sky-700 transition-colors
+            disabled:opacity-50 disabled:cursor-not-allowed"
+            disabled={!title && !content}
           >
             Capture
           </button>

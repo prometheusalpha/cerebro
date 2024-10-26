@@ -11,7 +11,7 @@ export default function CommandInput({ onSubmit }: CommandInputProps) {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (command.trim()) {
-      onSubmit(command);
+      onSubmit(command.trim());
       setCommand("");
     }
   };

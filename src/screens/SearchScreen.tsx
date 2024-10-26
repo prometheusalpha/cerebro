@@ -1,11 +1,15 @@
 import { useState } from "react";
-import { Search as SearchIcon } from "lucide-react";
+import { Edit2, Search as SearchIcon } from "lucide-react";
 import { useStore } from "../store/useStore";
+import { Note } from "../types";
+import ItemDetailModal from "../components/ItemDetailModal";
 
 export default function SearchScreen() {
   const [query, setQuery] = useState("");
   const searchNotes = useStore((state) => state.searchNotes);
   const results = query ? searchNotes(query) : [];
+  const [selectedNote, setSelectedNote] = useState<Note | null>(null);
+  const { updateNote } = useStore();
 
   return (
     <div>
@@ -31,7 +35,7 @@ export default function SearchScreen() {
             {results.map((note) => (
               <div
                 key={note.id}
-                className="bg-gray-200 dark:bg-gray-800 p-6 rounded-lg shadow-sm border dark:border-gray-700"
+                className="bg-gray-200 group relative dark:bg-gray-800 p-6 rounded-lg shadow-sm border dark:border-gray-700"
               >
                 <h3 className="text-lg font-medium mb-2">{note.title}</h3>
                 <p className="text-gray-600 mb-3">{note.content}</p>
@@ -47,10 +51,28 @@ export default function SearchScreen() {
                     ))}
                   </div>
                 )}
+                {/* icon to get to detail modal */}
+                <button
+                  onClick={() => setSelectedNote(note)}
+                  className="absolute right-5 top-5 p-1 rounded opacity-0 group-hover:opacity-100 transition-opacity"
+                >
+                  <Edit2 className="w-4 h-4" />
+                </button>
               </div>
             ))}
           </div>
         </div>
+      )}
+
+      {selectedNote && (
+        <ItemDetailModal
+          item={selectedNote}
+          onClose={() => setSelectedNote(null)}
+          onSave={(updatedNote) => {
+            updateNote(updatedNote as Note);
+            setSelectedNote(null);
+          }}
+        />
       )}
     </div>
   );
