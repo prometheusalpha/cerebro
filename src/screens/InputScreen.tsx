@@ -26,6 +26,8 @@ export default function InputScreen() {
       setContent("");
       setTags([]);
     }
+    // clear tag input
+    setTagInput("");
   };
 
   const handleAddTag = (e: React.KeyboardEvent) => {

@@ -47,6 +47,17 @@ function DraggableNote({ note, onEdit }: { note: Note; onEdit: () => void }) {
       <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-2 mb-2">
         {note.content}
       </p>
+      {/* tags */}
+      <div className="flex gap-2">
+        {note.tags.map((tag) => (
+          <span
+            key={tag}
+            className="px-2 py-1 rounded-lg bg-sky-100 dark:bg-sky-800 text-sky-600 dark:text-sky-400 text-xs font-medium"
+          >
+            #{tag}
+          </span>
+        ))}
+      </div>
     </div>
   );
 }

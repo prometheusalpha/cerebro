@@ -40,7 +40,7 @@ export default function ParaItemDetailModal({
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
       <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xl w-full max-w-2xl">
-        <div className="p-6">
+        <div className="p-6 max-h-[80vh] overflow-y-auto">
           <div className="flex justify-between items-center mb-6">
             <h2 className="text-2xl font-semibold">Edit PARA Item</h2>
             <button
@@ -127,6 +127,8 @@ export default function ParaItemDetailModal({
                     key={note.id}
                     className="bg-gray-100 dark:bg-gray-700 rounded-lg p-4"
                   >
+                    {/* title */}
+                    <p className="text-lg font-semibold">{note.title}</p>
                     <p className="text-sm">{note.content}</p>
                   </div>
                 ))}
