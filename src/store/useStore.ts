@@ -12,6 +12,7 @@ interface Store {
   addParaItem: (item: Omit<ParaItem, "id">) => void;
   updateParaItem: (item: ParaItem) => void;
   searchNotes: (query: string) => Note[];
+  searchNoteByParaId: (paraId: number) => Note[];
 }
 
 // export const useStore = create<Store>((set, get) => ({

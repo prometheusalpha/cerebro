@@ -22,7 +22,7 @@ export default function Layout() {
   const location = useLocation();
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 flex">
+    <div className="min-h-screen overflow-y-auto bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 flex">
       <nav className="w-16 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 flex flex-col items-center py-4 fixed h-full">
         <Link to="/" className="p-3 mb-6">
           <Brain className="w-6 h-6 text-sky-600 dark:text-sky-400" />

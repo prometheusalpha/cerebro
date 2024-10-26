@@ -24,12 +24,12 @@ export default function ParaItemDetailModal({
   const [editedItem, setEditedItem] = useState(item);
 
   // fetch notes from supabase
-  const { searchNotes } = useStore();
+  const { searchNoteByParaId } = useStore();
   const [notes, setNotes] = useState<Note[]>([]);
   useEffect(() => {
-    const notes = searchNotes("");
+    const notes = searchNoteByParaId(item.id);
     setNotes(notes);
-  }, [searchNotes]);
+  }, [item.id, searchNoteByParaId]);
 
   const handleSave = (e: React.FormEvent) => {
     e.preventDefault();

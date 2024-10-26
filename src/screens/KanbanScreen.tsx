@@ -118,7 +118,6 @@ export default function KanbanScreen() {
   return (
     <div className="h-full">
       <h1 className="text-2xl font-semibold mb-6">CODE Workflow</h1>
-
       <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
         <div className="grid grid-cols-4 gap-4 h-[calc(100vh-12rem)]">
           {stages.map((stage) => (
