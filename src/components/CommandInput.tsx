@@ -23,7 +23,7 @@ export default function CommandInput({ onSubmit }: CommandInputProps) {
           type="text"
           value={command}
           onChange={(e) => setCommand(e.target.value)}
-          className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-sky-500 focus:border-transparent"
+          className="bg-transparent w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-sky-500 focus:border-transparent focus:outline-none"
           placeholder="Type a command (e.g., 'add note: Meeting notes')"
         />
       </div>

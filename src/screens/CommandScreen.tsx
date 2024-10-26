@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import CommandInput from "../components/CommandInput";
+import { useStore } from "../store/useStore";
+import { Note } from "../types";
 
 interface CommandLog {
   id: string;
@@ -24,22 +26,46 @@ export default function CommandScreen() {
     ]);
   };
 
+  const { notes, addNote, updateNote, fetchNotes } = useStore((state) => state);
+  useEffect(() => {
+    fetchNotes();
+  }, [fetchNotes]);
+
   const processCommand = (command: string): string => {
     const lowercaseCommand = command.toLowerCase();
 
     if (lowercaseCommand.startsWith("add note:")) {
+      // Process the "add note" command
+      addNote({
+        title: lowercaseCommand.split(":")[1],
+        content: "",
+        tags: [],
+        para_id: null,
+        stage: "capture" as Note["stage"],
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+      });
       return "Note added successfully to Capture stage.";
     }
 
-    if (lowercaseCommand.startsWith("move to:")) {
-      return "Note moved to specified stage.";
+    if (lowercaseCommand.startsWith("tag:")) {
+      // Process the "tag" command
+      const [_, noteId, tags] = lowercaseCommand.split(" ");
+      const note = notes.find((n) => n.id === parseInt(noteId));
+      if (note) {
+        updateNote({
+          ...note,
+          tags: [...note.tags, tags],
+          updated_at: new Date().toISOString(),
+        });
+        return "Tags added successfully.";
+      }
+      return "Note not found.";
     }
 
     if (lowercaseCommand === "help") {
       return `Available commands:
 - add note: <title> - Creates a new note
-- move to: <stage> <note-id> - Moves note to specified stage
-- tag: <note-id> <tags> - Adds tags to a note
 - help - Shows this help message`;
     }
 
@@ -48,7 +74,7 @@ export default function CommandScreen() {
 
   return (
     <div className="max-w-4xl mx-auto">
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-800 p-6">
         <h1 className="text-2xl font-semibold mb-6">Command Interface</h1>
 
         <div className="mb-6">
