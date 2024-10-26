@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useEffect } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Layout from './components/Layout';
+import CommandScreen from './screens/CommandScreen';
 import InputScreen from './screens/InputScreen';
 import KanbanScreen from './screens/KanbanScreen';
 import ParaScreen from './screens/ParaScreen';
 import SearchScreen from './screens/SearchScreen';
-import CommandScreen from './screens/CommandScreen';
 import { useThemeStore } from './store/useThemeStore';
 
 function App() {
@@ -22,7 +22,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Layout />}>
+        <Route path="*" element={<Layout />}>
           <Route index element={<InputScreen />} />
           <Route path="kanban" element={<KanbanScreen />} />
           <Route path="para" element={<ParaScreen />} />
